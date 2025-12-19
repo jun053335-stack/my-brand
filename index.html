@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人品牌 | 商品簡介</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* 彈窗動畫效果 */
+        #product-modal.hidden {
+            display: none;
+        }
+        #product-modal:not(.hidden) {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- 頂部導覽 / 個人資料 -->
+    <header class="relative bg-gradient-to-r from-blue-600 to-indigo-700 pt-16 pb-32 text-center text-white px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="relative inline-block mb-4">
+                <img 
+                    src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&size=128" 
+                    alt="個人頭像" 
+                    class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover mx-auto bg-gray-200"
+                >
+                <div class="absolute bottom-1 right-1 bg-green-500 w-5 h-5 rounded-full border-2 border-white"></div>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">你的品牌名字</h1>
+            <p class="text-blue-100 opacity-90 max-w-md mx-auto">
+                歡迎光臨我的個人空間！這裡展示了我的精選商品與專業服務。
+            </p>
+            
+            <!-- 社交連結 -->
+            <div class="flex justify-center space-x-4 mt-6">
+                <a href="#" class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all" title="Instagram">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all" title="LINE">
+                    <i class="fab fa-line text-xl"></i>
+                </a>
+                <a href="mailto:yourname@email.com" class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all" title="Email">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-6xl mx-auto px-4 -mt-16 pb-20">
+        
+        <!-- 商品展示區 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center bg-white/80 backdrop-blur inline-flex px-4 py-2 rounded-xl shadow-sm">
+                <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3"><i class="fas fa-shopping-bag text-sm"></i></span>
+                精選商品
+            </h2>
+            
+            <!-- 商品網格 -->
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 由 JS 動態生成 -->
+            </div>
+        </section>
+
+        <!-- 個人經歷 -->
+        <section class="glass-card rounded-3xl p-8 mb-12 shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center">
+                <span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center mr-3"><i class="fas fa-user text-sm"></i></span>
+                關於我
+            </h2>
+            <div class="prose text-gray-600 leading-relaxed">
+                <p class="mb-4">
+                    你好！我是你的品牌主理人。這裡是我精心挑選的生活好物，每一件都代表了我對品質與美學的堅持。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <ul class="space-y-2">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i> 精選全球優質品牌</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i> 提供點數兌換與現金購買</li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i> 快速出貨與完整售後</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i> 100% 滿意保證</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯繫按鈕 -->
+        <section class="text-center">
+            <a href="#" class="inline-flex items-center justify-center w-full md:w-auto bg-gray-900 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-gray-800 transition-all shadow-xl hover:transform hover:-translate-y-1">
+                <i class="fas fa-phone-alt mr-3"></i> 立即與我聯繫諮詢
+            </a>
+        </section>
+    </main>
+
+    <!-- 商品介紹彈窗 (Modal) -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10">
+                <i class="fas fa-times-circle text-3xl"></i>
+            </button>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2">
+                    <img id="modal-img" src="" alt="" class="w-full h-64 md:h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8">
+                    <div id="modal-tag" class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-bold mb-4">精選推薦</div>
+                    <h3 id="modal-title" class="text-2xl font-bold mb-4 text-gray-900">商品名稱</h3>
+                    <div class="space-y-4 text-gray-600 mb-8">
+                        <p id="modal-desc">這裡會顯示詳細的商品介紹文字...</p>
+                        <div class="border-t pt-4">
+                            <p class="text-sm text-gray-400 mb-1">購買價格</p>
+                            <div class="flex items-baseline space-x-4">
+                                <span id="modal-price-nt" class="text-2xl font-bold text-blue-600">NT$ 0</span>
+                                <span id="modal-price-pts" class="text-lg font-medium text-amber-500">0 點數</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+                        立即下單
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="bg-white border-t border-gray-100 py-10 text-center text-gray-400 text-sm">
+        <p>&copy; 2024 Your Brand Name. 專注質感生活每一天。</p>
+    </footer>
+
+    <script>
+        // 商品資料
+        const products = [
+            { id: 1, name: "極簡風格手錶", priceNT: 2500, pricePts: 250, desc: "結合北歐簡約美學與高精度機芯，這款手錶不僅是計時工具，更是展現品味的日常配飾。採用防刮藍寶石鏡面與義大利真皮錶帶。", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&fit=crop" },
+            { id: 2, name: "經典底片相機", priceNT: 4800, pricePts: 480, desc: "在數碼時代重拾感光膠卷的溫度。這款機械相機擁有優秀的鏡頭質素，能拍出具有獨特顆粒感的復古照片。", img: "https://images.unsplash.com/photo-1526170315870-ef6d82f583ad?w=800&fit=crop" },
+            { id: 3, name: "無線降噪耳機", priceNT: 6200, pricePts: 620, desc: "領先的主動降噪技術，讓你隨時隨地擁有安靜的私人音樂空間。長達 30 小時續航，支持快充與空間音效。", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&fit=crop" },
+            { id: 4, name: "機能探險背包", priceNT: 3200, pricePts: 320, desc: "專為城市通勤與短途戶外設計。採用 Cordura 耐磨防水面料，具備多層收納與筆電隔層。", img: "https://images.unsplash.com/photo-1553062407-98eeb94c6a62?w=800&fit=crop" },
+            { id: 5, name: "北歐風居家檯燈", priceNT: 1800, pricePts: 180, desc: "無頻閃設計保護視力，三段色溫調節。橡木底座搭配磨砂金屬燈罩，為書房營造靜謐溫馨的氛圍。", img: "https://images.unsplash.com/photo-1507473885765-e6ed657f9971?w=800&fit=crop" },
+            { id: 6, name: "療癒室內盆栽", priceNT: 850, pricePts: 85, desc: "精選淨化空氣的綠色植物，搭配手工素燒陶盆。這不僅是一盆植物，更是桌面上的森林角落。", img: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&fit=crop" },
+            { id: 7, name: "時尚飛行員墨鏡", priceNT: 2200, pricePts: 220, desc: "經典飛行員鏡架，配備偏光鏡片，有效過濾強光與紫外線。輕量化鈦金屬材質，佩戴無負擔。", img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&fit=crop" },
+            { id: 8, name: "全能工作手札", priceNT: 650, pricePts: 65, desc: "180度平攤設計，選用 100g 優質道林紙。內含月計畫、週計畫與自由筆記頁，助你高效規劃生活。", img: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&fit=crop" },
+            { id: 9, name: "輕量運動跑鞋", priceNT: 3800, pricePts: 380, desc: "全掌回彈中底，輕盈透氣針織鞋面。無論是日常慢跑還是高強度訓練，都能提供卓越的支撐與緩震。", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&fit=crop" },
+            { id: 10, name: "手感陶瓷馬克杯", priceNT: 520, pricePts: 52, desc: "手工拉胚製作，每一隻杯子的紋理都是唯一。採用食具級安全釉料，溫潤的手感讓喝水也成為一種享受。", img: "https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?w=800&fit=crop" }
+        ];
+
+        // 動態渲染商品
+        const productGrid = document.getElementById('product-grid');
+        products.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'glass-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer';
+            card.onclick = () => openModal(p.id);
+            card.innerHTML = `
+                <div class="overflow-hidden h-48">
+                    <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-xl mb-1">${p.name}</h3>
+                    <div class="mb-4">
+                        <div class="text-blue-600 font-bold text-lg">NT$ ${p.priceNT.toLocaleString()}</div>
+                        <div class="text-amber-500 text-sm font-medium"><i class="fas fa-coins mr-1"></i>${p.pricePts} 點數</div>
+                    </div>
+                    <button class="w-full bg-gray-50 text-gray-700 py-2 rounded-lg text-sm font-bold group-hover:bg-blue-600 group-hover:text-white transition-all border border-gray-100">
+                        瞭解更多
+                    </button>
+                </div>
+            `;
+            productGrid.appendChild(card);
+        });
+
+        // 彈窗控制邏輯
+        const modal = document.getElementById('product-modal');
+        
+        function openModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('modal-img').src = product.img;
+            document.getElementById('modal-title').innerText = product.name;
+            document.getElementById('modal-desc').innerText = product.desc;
+            document.getElementById('modal-price-nt').innerText = `NT$ ${product.priceNT.toLocaleString()}`;
+            document.getElementById('modal-price-pts').innerText = `${product.pricePts} 點數`;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+
+</body>
+</html>
